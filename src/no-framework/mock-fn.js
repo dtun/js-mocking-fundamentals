@@ -11,6 +11,14 @@ const thumbWar = require('../thumb-war')
 const utils = require('../utils')
 
 // Your Code:
+function fn(impl) {
+  const mockFn = (...args) => {
+    mockFn.mock.calls.push(args)
+    return impl(...args)
+  }
+  mockFn.mock = {calls: []}
+  return mockFn;
+}
 
 const originalGetWinner = utils.getWinner
 utils.getWinner = fn((p1, p2) => p1)

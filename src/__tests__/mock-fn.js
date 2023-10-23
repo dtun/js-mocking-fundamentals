@@ -24,6 +24,10 @@ test('returns winner', () => {
   const winner = thumbWar('Kent C. Dodds', 'Ken Wheeler')
   expect(winner).toBe('Kent C. Dodds')
   // Your code:
+  expect(utils.getWinner.mock.calls).toEqual([
+    ['Kent C. Dodds', 'Ken Wheeler'],
+    ['Kent C. Dodds', 'Ken Wheeler'],
+  ])
 
   // cleanup
   utils.getWinner = originalGetWinner
