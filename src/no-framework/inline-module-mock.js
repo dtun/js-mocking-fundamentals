@@ -13,6 +13,16 @@ function fn(impl = () => {}) {
   return mockFn
 }
 
+const utilsPath = require.resolve('../utils')
+require.cache[utilsPath] = {
+  id: utilsPath,
+  filename: utilsPath,
+  loaded: true,
+  exports: {
+    getWinner: fn((p1, p2) => p1)
+  }
+}
+
 const assert = require('assert')
 const thumbWar = require('../thumb-war')
 const utils = require('../utils')
@@ -25,6 +35,7 @@ assert.deepStrictEqual(utils.getWinner.mock.calls, [
 ])
 
 // cleanup
+delete require.cache[utilsPath]
 
 /**
  * Hints:
