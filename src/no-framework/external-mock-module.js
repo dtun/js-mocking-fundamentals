@@ -13,15 +13,10 @@ function fn(impl = () => {}) {
   return mockFn
 }
 
+require('../__no-framework-mocks__/utils')
 const utilsPath = require.resolve('../utils')
-require.cache[utilsPath] = {
-  id: utilsPath,
-  filename: utilsPath,
-  loaded: true,
-  exports: {
-    getWinner: fn((p1, p2) => p1),
-  },
-}
+const mockUtilsPath = require.resolve('../__no-framework-mocks__/utils')
+require.cache[utilsPath] = require.cache[mockUtilsPath]
 
 const assert = require('assert')
 const thumbWar = require('../thumb-war')
